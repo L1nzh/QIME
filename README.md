@@ -1,4 +1,4 @@
-# QIME: Quality & Interpretability optimized Medical Embeddings
+# QIME
 
 🎯 **Generate high-quality interpretable semantic text embeddings by creating and answering discriminative yes/no questions.** 
 
