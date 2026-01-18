@@ -15,7 +15,7 @@ This project implements the QIME framework, featuring:
 ## Directory Structure
 ```
 QIME/
-├── checkpoints/       # Pre-trained models (QIME, OGQG, QAEmb-IMEC)
+├── checkpoints/       # Pre-trained models (QIME, CQG-MBQA, QAEmb-MBQA)
 ├── data/              # Datasets (PubMed documents, terms)
 ├── framework/         # Core source code
 │   ├── ogqg.py        # Ontology-Grounded Question Generation
@@ -89,8 +89,8 @@ python framework/eval_mteb_medical.py
 
 This script evaluates:
 *   **QIME** (Ours)
-*   **CQBA-MBQA** (Baseline)
-*   **QAEmb-IMEC** (Baseline)
+*   **CQG-MBQA** (Baseline)
+*   **QAEmb-MBQA** (Baseline)
 *   **LDIR-UAE-500** (Baseline)
 *   Various general domain models (BERT, BioLORD, etc.)
 

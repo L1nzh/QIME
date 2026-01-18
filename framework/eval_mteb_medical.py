@@ -2,8 +2,8 @@
 """
 Medical MTEB Evaluation Script for QIME Project
 Evaluates the following models:
-1. OGQG (formerly CQG-MBQA) (Baseline)
-2. QAEmb-IMEC (formerly QAEmb-MBQA) (Baseline)
+1. CQG-MBQA (Baseline)
+2. QAEmb-MBQA (Baseline)
 3. QIME (Ours)
 4. LDIR-UAE-500 (Baseline)
 And various general/medical baseline models.
@@ -105,14 +105,14 @@ def get_model_wrapper(model_name):
             batch_size=256
         )
 
-    # 2. QIME Models (OGQG, QAEmb-IMEC, QIME)
+    # 2. QIME Models (CQG-MBQA, QAEmb-MBQA, QIME)
     model_config = {
-        "OGQG": {
+        "CQG-MBQA": {
             "path": "CQG-MBQA", # Keeping original path for now
             "model_file": "mbqa_model.pt", # Keeping original filename
             "backbone": "WhereIsAI/UAE-Large-V1"
         },
-        "QAEmb-IMEC": {
+        "QAEmb-MBQA": {
             "path": "QAEmb-MBQA", # Keeping original path
             "model_file": "qaemb_model.pt",
             "backbone": "WhereIsAI/UAE-Large-V1"
@@ -382,8 +382,8 @@ def main():
     print(f"\n[INFO] Target Tasks ({len(tasks)}): {[t.metadata.name for t in tasks]}")
     
     models = [
-        "OGQG",
-        "QAEmb-IMEC",
+        "CQG-MBQA",
+        "QAEmb-MBQA",
         "QIME",
         "LDIR-UAE-500",
         "bag_of_words",
