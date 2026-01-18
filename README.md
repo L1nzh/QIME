@@ -26,6 +26,9 @@ QIME/
 └── results/           # Evaluation outputs
 ```
 
+**Note:** Due to their large size, the `checkpoints` and `data` (specifically `pubmed_documents_5M.json`) directories are not included directly in this repository. They can be downloaded from:
+[https://drive.google.com/drive/folders/1YPlQrg_L6U5jS7iHJQOpIcRcpu5L9e4u](https://drive.google.com/drive/folders/1YPlQrg_L6U5jS7iHJQOpIcRcpu5L9e4u)
+
 ## Installation
 
 ### Prerequisites
