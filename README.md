@@ -89,7 +89,7 @@ python framework/eval_mteb_medical.py
 
 This script evaluates:
 *   **QIME** (Ours)
-*   **OGQG** (Baseline)
+*   **CQBA-MBQA** (Baseline)
 *   **QAEmb-IMEC** (Baseline)
 *   **LDIR-UAE-500** (Baseline)
 *   Various general domain models (BERT, BioLORD, etc.)
