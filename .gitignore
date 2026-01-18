@@ -1,0 +1,9 @@
+data/pubmed_documents_5M.json
+checkpoints/
+results/
+2025AA/
+__pycache__/
+.ipynb_checkpoints/
+temp/
+output/
+*.pycdata/pubmedqa_hunflair_terms_complete.json
