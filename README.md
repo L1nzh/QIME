@@ -4,7 +4,7 @@
 
 This project implements the QIME framework, featuring:
 *   **OGQG (Ontology-Grounded Question Generation)**: Generates discriminative yes/no questions grounded in medical ontologies (UMLS).
-*   **IMEC (Interpretable Medical Embedding Construction)**: Trains a multi-task binary classifier to answer these questions, producing interpretable embeddings.
+*   **Interpretable Medical Embedding Construction: Classifier-Based Approach**: Trains a multi-task binary classifier to answer these questions, producing interpretable embeddings.
 
 ## 🌟 Key Features
 - 😎 **Interpretable Semantic Text Embeddings**: Each dimension of the embedding corresponds to a specific medical question (e.g., "Does this text discuss a cardiovascular disease?").
