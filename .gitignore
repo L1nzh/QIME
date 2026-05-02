@@ -6,4 +6,9 @@ __pycache__/
 .ipynb_checkpoints/
 temp/
 output/
-*.pycdata/pubmedqa_hunflair_terms_complete.json
+*.pyc
+data/pubmedqa_hunflair_terms_complete.json
+term_map/
+framework/extract_cluster_cuis_from_context.py
+framework/map_terms_to_cui.py
+.DS_Store
