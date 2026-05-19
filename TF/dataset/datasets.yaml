@@ -1,0 +1,34 @@
+datasets:
+  - name: biorxiv_clustering_p2p
+    id: mteb/biorxiv-clustering-p2p
+  - name: biorxiv_clustering_s2s
+    id: mteb/biorxiv-clustering-s2s
+  - name: medrxiv_clustering_p2p
+    id: mteb/medrxiv-clustering-p2p
+  - name: medrxiv_clustering_s2s
+    id: mteb/medrxiv-clustering-s2s
+  - name: clustrec_covid
+    id: Uri-ka/ClusTREC-Covid
+    subset: ClusTREC-Covid
+  - name: biosses
+    id: mteb/biosses-sts
+  - name: r2medii_clinical_retrieval
+    id: mteb/R2MEDIIYiClinicalRetrieval
+    subset: corpus
+  - name: r2medpmc_clinical_retrieval
+    id: mteb/R2MEDPMCClinicalRetrieval
+    subset: corpus
+  - name: nfcorpus
+    id: mteb/nfcorpus
+  - name: public_health_qa
+    id: mteb/PublicHealthQA
+    subset: english-corpus
+  - name: medical_qa
+    id: mteb/medical_qa
+  - name: scifact
+    id: mteb/scifact
+  - name: arguana
+    id: mteb/arguana
+  - name: trec_covid
+    id: mteb/trec-covid
+
