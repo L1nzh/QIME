@@ -10,11 +10,11 @@ import yaml
 from tqdm import tqdm
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-CODE_DIR = REPO_ROOT / "code"
-TASKS_CONFIG_PATH = REPO_ROOT / "dataset" / "datasets.yaml"
-QUESTIONS_PATH = REPO_ROOT / "data" / "questions.json"
-RESULTS_DIR = REPO_ROOT / "rebuttal" / "results"
+TF_ROOT = Path(__file__).resolve().parents[1]
+CODE_DIR = TF_ROOT / "code"
+TASKS_CONFIG_PATH = TF_ROOT / "dataset" / "datasets.yaml"
+QUESTIONS_PATH = TF_ROOT / "data" / "questions.json"
+RESULTS_DIR = TF_ROOT / "results"
 INNER_RESULTS_DIR = Path("no_model_name_available") / "no_revision_available"
 DEFAULT_LAMBDAS = [0.1, 0.3, 0.5, 0.7, 0.9]
 DEFAULT_TOPK = 256
