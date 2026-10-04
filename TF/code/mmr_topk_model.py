@@ -4,7 +4,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, util
 
 class EncoderModel:
-    def __init__(self, topk=32, mmr_diversity=0.7, device=None, que_path='../data/questions.json'):
+    def __init__(self, topk=32, mmr_diversity=0.7, device=None, que_path='../data/questions.json', backbone_revision=None):
         self.topk = topk
         self.mmr_diversity = mmr_diversity
         self.model_name = f'top{self.topk}_{self.mmr_diversity}_binary_mmr'
@@ -13,7 +13,9 @@ class EncoderModel:
         if device is None:
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.device = device
-        self.__inner_encoder = SentenceTransformer('abhinand/MedEmbed-large-v0.1', device=device)
+        self.__inner_encoder = SentenceTransformer(
+            'abhinand/MedEmbed-large-v0.1', device=device, revision=backbone_revision,
+        )
         # Initialize list to store indices of '1's
         self.one_indices = []
         # Load data

@@ -27,16 +27,27 @@ Training-free refers to embedding construction using a fixed question bank and a
 
 ## Installation
 
-Clone the repository and create the supplied environment:
+For TF+MMR inference and paper evaluation, use the lightweight environment below. The validated setup is Linux, Python 3.10, and PyTorch 2.6.0 with CUDA 12.4:
 
 ```bash
 git clone https://github.com/L1nzh/QIME.git
 cd QIME
+python3.10 -m venv qime-eval-env
+source qime-eval-env/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-eval.txt
+```
+
+`requirements-eval.txt` pins the validated encoder and evaluation libraries: PyTorch 2.6.0, Sentence Transformers 3.4.1, Transformers 4.49.0, MTEB 1.39.7, datasets 3.6.0, NumPy 1.26.4, and scikit-learn 1.7.2. A CUDA GPU is recommended; the TF encoder also selects CPU when CUDA is unavailable. First use downloads the pretrained encoder from Hugging Face.
+
+For a minimal download-and-inference example, see the [Hugging Face release](https://huggingface.co/tyxqiean/QIME#download-and-run).
+
+The original `environment.yml` remains available for question generation and classifier workflows. It contains additional dependencies and different encoder-library versions; it is not the validated TF+MMR evaluation environment above:
+
+```bash
 conda env create -f environment.yml
 conda activate qime
 ```
-
-The supplied environment targets Linux/CUDA and includes dependencies for question generation, classifier training, and evaluation. A CUDA GPU is recommended; the TF encoder also selects CPU when CUDA is unavailable. First use downloads the pretrained encoder from Hugging Face.
 
 An LLM service/API or local generation backend and UMLS resources are needed when generating new questions. They are not needed for TF+MMR inference with `TF/data/questions.json`.
 
@@ -55,6 +66,7 @@ model = EncoderModel(
     topk=256,
     mmr_diversity=0.7,
     que_path="TF/data/questions.json",
+    backbone_revision="963121bfb9c625475f65b08fb54990ce9c4e7a1a",
 )
 
 texts = [
@@ -88,16 +100,41 @@ Increasing λ places more weight on relevance; decreasing it places more weight 
 
 ## Evaluate QIME (main method)
 
-Run the MMR evaluation script **from `TF/scripts/`** because its imports and default paths are relative to that directory:
+Run this command **from the repository root** in the `requirements-eval.txt` environment to select the 12 datasets in the paper's main tables:
 
 ```bash
-cd TF/scripts
-python eval_mteb_mmr.py --topks 256 --questions-path ../data/questions.json --gpus 0
+PYTHONHASHSEED=42 python TF/scripts/eval_mteb_mmr.py --paper --gpus 0
 ```
 
-This runner imports `mmr_topk_model.EncoderModel` and uses its default `mmr_diversity=0.7`. It has no `--mmr-diversity` command-line flag. Use `--topks 256` for the paper's main sparsity setting; `--topks 128 256` runs a sparsity comparison. `--gpus` distributes top-k configurations across GPUs; it does not split a single top-k configuration across devices.
+`--paper` selects `TF/dataset/paper12.yaml`, the released ordered 8,855-question bank, k=256, lambda=0.7, and the pinned MedEmbed revision. The default seed is 42 and the encoding/MMR batch size is 128. It runs **only TF+MMR**, with no classifier or baseline evaluations. `--gpus` distributes top-k configurations across GPUs; it does not split one configuration across devices.
 
-Tasks are loaded from `TF/dataset/datasets.yaml`, and results are written under `TF/results/`. The supplied task list also includes SciFact and ArguAna, beyond the biomedical tasks in the paper's main tables. Record the actual question bank, task configuration, model/dependency versions, and output representation when comparing results with the paper. These commands select the main implementation and hyperparameters; they do not establish numerical reproduction of the reported tables.
+The paper configuration contains:
+
+| Task group | Datasets | Metric |
+| --- | --- | --- |
+| Clustering | BiorxivClusteringP2P, BiorxivClusteringS2S, MedrxivClusteringP2P, MedrxivClusteringS2S, ClusTREC-Covid | V-measure |
+| STS | BIOSSES | Cosine Spearman correlation |
+| Retrieval | NFCorpus, PublicHealthQA, MedicalQARetrieval, TRECCOVID, R2MEDIIYiClinicalRetrieval, R2MEDPMCClinicalRetrieval | nDCG@10 |
+
+All tasks use their MTEB test evaluation protocol, with dataset revisions fixed in the YAML. **PublicHealthQA is restricted to English.** ClusTREC-Covid keeps both English configurations (`title and abstract`, `title`); MTEB 1.39.7 samples 4% of each configuration (91 of 2,284 documents) and applies its default bootstrapped clustering evaluator. Its task score is the mean of both configurations. The four other clustering tasks use all 10 supplied trials.
+
+Inspect the selected tasks without downloading datasets or loading a model:
+
+```bash
+python TF/scripts/eval_mteb_mmr.py --paper --list-tasks
+```
+
+Results are written under `TF/results/paper12/`. A `run_manifest.json` records model settings, question-bank hash, data revisions/subsets, seed, batch size, and installed library versions. MMR runs in bounded batches. Full activation-index dumps are optional via `--save-indices`; they are not required for benchmark scores. Failed workers return a nonzero exit code, and completed MTEB results can be reused on restart with the same manifest.
+
+The [Hugging Face release](https://huggingface.co/tyxqiean/QIME#benchmark-reproduction) has been reproduced on nine of the paper's benchmarks, with scores close to Tables 1 and 2. Its six-task retrieval average is 41.1215 versus 41.10 in the paper. The remaining three clustering tasks were not completed, so the full 12-task reproduction remains incomplete.
+
+For the extended task list or sparsity comparisons, omit `--paper`:
+
+```bash
+python TF/scripts/eval_mteb_mmr.py --topks 128 256 --gpus 0
+```
+
+This uses `TF/dataset/datasets.yaml`, which additionally includes SciFact and ArguAna, and writes to `TF/results/`. Keep the task protocol and question bank explicit when reporting an ablation.
 
 ### Ablations and additional TF variants
 

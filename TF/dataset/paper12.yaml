@@ -1,0 +1,77 @@
+# Paper-main TF+MMR protocol; default MTEB 1.39.7 test evaluation.
+questions_sha256: 79b00c0675cdf38a0a5de0bbae7c055a0c3072bf8a868ae362d739fe85ea5e74
+backbone_revision: 963121bfb9c625475f65b08fb54990ce9c4e7a1a
+datasets:
+  - name: biosses
+    id: mteb/biosses-sts
+    revision: d3fb88f8f02e40887cd149695127462bbcf29b4a
+    metric: cosine_spearman
+    eval_subsets:
+      - "default"
+  - name: nfcorpus
+    id: mteb/nfcorpus
+    revision: ec0fa4fe99da2ff19ca1214b7966684033a58814
+    metric: ndcg_at_10
+    eval_subsets:
+      - "default"
+  - name: public_health_qa
+    id: xhluca/publichealth-qa
+    revision: 3b67b6b63ee464870fc21cdc888289c843204051
+    metric: ndcg_at_10
+    eval_subsets:
+      - "english"
+  - name: medical_qa
+    id: mteb/medical_qa
+    revision: ae763399273d8b20506b80cf6f6f9a31a6a2b238
+    metric: ndcg_at_10
+    eval_subsets:
+      - "default"
+  - name: trec_covid
+    id: mteb/trec-covid
+    revision: bb9466bac8153a0349341eb1b22e06409e78ef4e
+    metric: ndcg_at_10
+    eval_subsets:
+      - "default"
+  - name: r2medii_clinical_retrieval
+    id: R2MED/IIYi-Clinical
+    revision: 974abbc9bc281c3169180a6aa5d7586cfd2f5877
+    metric: ndcg_at_10
+    eval_subsets:
+      - "default"
+  - name: r2medpmc_clinical_retrieval
+    id: R2MED/PMC-Clinical
+    revision: 812829522f7eaa407ef82b96717be85788a50f7e
+    metric: ndcg_at_10
+    eval_subsets:
+      - "default"
+  - name: biorxiv_clustering_p2p
+    id: mteb/biorxiv-clustering-p2p
+    revision: 65b79d1d13f80053f67aca9498d9402c2d9f1f40
+    metric: v_measure
+    eval_subsets:
+      - "default"
+  - name: biorxiv_clustering_s2s
+    id: mteb/biorxiv-clustering-s2s
+    revision: 258694dd0231531bc1fd9de6ceb52a0853c6d908
+    metric: v_measure
+    eval_subsets:
+      - "default"
+  - name: medrxiv_clustering_p2p
+    id: mteb/medrxiv-clustering-p2p
+    revision: e7a26af6f3ae46b30dde8737f02c07b1505bcc73
+    metric: v_measure
+    eval_subsets:
+      - "default"
+  - name: medrxiv_clustering_s2s
+    id: mteb/medrxiv-clustering-s2s
+    revision: 35191c8c0dca72d8ff3efcd72aa802307d469663
+    metric: v_measure
+    eval_subsets:
+      - "default"
+  - name: clustrec_covid
+    id: Uri-ka/ClusTREC-Covid
+    revision: 7f3489153b8dad7336a54f63202deb1414c33309
+    metric: v_measure
+    eval_subsets:
+      - "title and abstract"
+      - "title"

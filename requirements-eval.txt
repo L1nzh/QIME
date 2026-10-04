@@ -1,0 +1,13 @@
+# Validated TF+MMR evaluation environment: Linux, Python 3.10, CUDA 12.4.
+# No question-generation LLM, UMLS installation, or classifier training dependencies.
+torch==2.6.0
+sentence-transformers==3.4.1
+transformers==4.49.0
+huggingface-hub==0.36.0
+numpy==1.26.4
+mteb==1.39.7
+datasets==3.6.0
+scikit-learn==1.7.2
+scipy==1.15.3
+PyYAML==6.0.3
+tqdm==4.70.1
