@@ -126,7 +126,7 @@ python TF/scripts/eval_mteb_mmr.py --paper --list-tasks
 
 Results are written under `TF/results/paper12/`. A `run_manifest.json` records model settings, question-bank hash, data revisions/subsets, seed, batch size, and installed library versions. MMR runs in bounded batches. Full activation-index dumps are optional via `--save-indices`; they are not required for benchmark scores. Failed workers return a nonzero exit code, and completed MTEB results can be reused on restart with the same manifest.
 
-The [Hugging Face release](https://huggingface.co/tyxqiean/QIME#benchmark-reproduction) has been reproduced on nine of the paper's benchmarks, with scores close to Tables 1 and 2. Its six-task retrieval average is 41.1215 versus 41.10 in the paper. The remaining three clustering tasks were not completed, so the full 12-task reproduction remains incomplete.
+The [Hugging Face release](https://huggingface.co/tyxqiean/QIME#benchmark-reproduction) has been reproduced on all 12 of the paper's benchmarks, with scores close to Tables 1 and 2. Its six-task retrieval average is 41.12 versus 41.10 in the paper. The Hugging Face model card reports all 12 scores rounded to two decimal places.
 
 For the extended task list or sparsity comparisons, omit `--paper`:
 
